@@ -2,9 +2,10 @@ import streamlit as st
 import pickle
 import re
 import pandas as pd
+import emoji
 
 def show():
-    st.title("😊 Sentiment Analysis")
+    st.title("😊 Sentiment Analysis with Emoji Support")
     st.write("Enter text to analyze its sentiment (Positive/Negative/Neutral)")
     
     # Twitter character limit
@@ -21,9 +22,136 @@ def show():
         st.error("❌ Model file not found.")
         st.stop()
 
-    # Text cleaning
-    def clean_text(text):
-        text = str(text).lower()
+    # Emoji to text converter
+    def emoji_to_text(text):
+        """Convert emoji to text description"""
+        # Dictionary of common emojis and their meanings
+        emoji_map = {
+            '😊': ' smiling ',
+            '😍': ' love ',
+            '🥰': ' love ',
+            '😘': ' love ',
+            '❤️': ' heart love ',
+            '💕': ' love ',
+            '💖': ' love ',
+            '💗': ' love ',
+            '💓': ' love ',
+            '😭': ' crying sad ',
+            '😢': ' sad ',
+            '😠': ' angry ',
+            '😡': ' angry ',
+            '🤬': ' angry ',
+            '😤': ' frustrated angry ',
+            '😞': ' disappointed sad ',
+            '😔': ' sad ',
+            '😟': ' worried ',
+            '😕': ' confused ',
+            '🙁': ' sad ',
+            '☹️': ' sad ',
+            '🎉': ' celebration happy ',
+            '✨': ' magic happy ',
+            '🌟': ' star happy ',
+            '⭐': ' star ',
+            '💫': ' happy ',
+            '🔥': ' fire awesome ',
+            '💯': ' perfect ',
+            '✅': ' check yes ',
+            '❌': ' wrong no ',
+            '👍': ' like good ',
+            '👎': ' dislike bad ',
+            '🙏': ' thank you please ',
+            '😂': ' laughing happy ',
+            '🤣': ' laughing happy ',
+            '😅': ' awkward ',
+            '😁': ' happy ',
+            '☀️': ' sun sunny ',
+            '🌧️': ' rain rainy ',
+            '⛈️': ' storm stormy ',
+            '🌈': ' rainbow happy ',
+            '🍕': ' pizza food ',
+            '🍔': ' burger food ',
+            '☕': ' coffee ',
+            '🍺': ' beer drink ',
+            '🍷': ' wine drink ',
+            '🏆': ' trophy win ',
+            '🥇': ' gold win ',
+            '💼': ' work job ',
+            '📚': ' books study ',
+            '📱': ' phone mobile ',
+            '💻': ' computer ',
+            '✈️': ' travel flight ',
+            '🚗': ' car drive ',
+            '🏠': ' home house ',
+            '🐶': ' dog pet ',
+            '🐱': ' cat pet ',
+            '🌸': ' flower beautiful ',
+            '🌺': ' flower beautiful ',
+            '🎵': ' music ',
+            '🎶': ' music ',
+            '⚽': ' sports ',
+            '🏀': ' sports ',
+            '🎮': ' gaming ',
+            '⌛': ' time waiting ',
+            '⏰': ' time alarm ',
+            '💔': ' heartbroken sad ',
+            '💪': ' strong power ',
+            '🤞': ' hope ',
+            '🤷': ' whatever ',
+            '🥺': ' pleading sad ',
+            '😴': ' sleepy tired ',
+            '🤒': ' sick ',
+            '🤢': ' disgusted ',
+            '🥳': ' party happy ',
+            '😎': ' cool ',
+            '🤔': ' thinking ',
+            '🤨': ' suspicious ',
+            '😏': ' smirk ',
+            '😬': ' awkward ',
+            '🥱': ' bored tired ',
+            '😷': ' sick mask ',
+            '🤕': ' hurt ',
+            '🤑': ' money rich ',
+            '🤮': ' disgusted vomit ',
+            '😈': ' evil ',
+            '👿': ' evil angry ',
+            '💀': ' dead ',
+            '☠️': ' dead danger ',
+            '👻': ' ghost ',
+            '🤖': ' robot ',
+            '🎃': ' halloween ',
+            '😺': ' cat happy ',
+            '😸': ' cat happy ',
+            '😹': ' cat laughing ',
+            '😻': ' cat love ',
+            '😼': ' cat smirk ',
+            '😽': ' cat kiss ',
+            '🙀': ' cat shock ',
+            '😿': ' cat cry ',
+            '😾': ' cat angry '
+        }
+        
+        # Replace emojis with text
+        for emoji_char, text_replacement in emoji_map.items():
+            if emoji_char in text:
+                text = text.replace(emoji_char, text_replacement)
+        
+        # Also try using emoji library for any missed emojis
+        try:
+            text = emoji.demojize(text)
+            # Convert :smile: format to readable text
+            text = text.replace(':', ' ').replace('_', ' ')
+        except:
+            pass
+            
+        return text
+
+    # Text cleaning with emoji support
+    def clean_text_with_emoji(text):
+        # First convert emojis to text
+        text_with_emoji_text = emoji_to_text(text)
+        
+        # Then do normal cleaning
+        text = str(text_with_emoji_text).lower()
         text = re.sub(r"[^a-zA-Z\s]", "", text)
         return text.strip()
 
@@ -32,10 +160,10 @@ def show():
     
     with col1:
         user_text = st.text_area(
-            "📝 Enter your text:", 
+            "📝 Enter your text (emojis supported!):", 
             height=100,
             max_chars=MAX_TWEET_LENGTH,
-            placeholder=f"Type your text here... (max {MAX_TWEET_LENGTH} characters)",
+            placeholder=f"Type your text here... emojis will be understood! (max {MAX_TWEET_LENGTH} characters)",
             key="text_input"
         )
     
@@ -65,13 +193,28 @@ def show():
                 st.error(f"❌ Over by {abs(remaining)} chars")
 
     # Analyze button
-    if st.button("🔍 Analyze Sentiment", type="primary"):
+    if st.button("🔍 Analyze Sentiment (with Emoji Support)", type="primary"):
         if not user_text.strip():
             st.warning("⚠️ Please enter some text!")
         elif len(user_text) > MAX_TWEET_LENGTH:
             st.error(f"❌ Text exceeds {MAX_TWEET_LENGTH} characters! Please shorten it.")
         else:
-            clean_txt = clean_text(user_text)
+            # Show original text with emojis
+            st.markdown("### 📝 Original Text:")
+            st.write(user_text)
+            
+            # Show emoji conversion
+            with st.expander("🔍 View emoji conversion"):
+                converted = emoji_to_text(user_text)
+                st.write("**After emoji conversion:**")
+                st.code(converted)
+                
+                cleaned = clean_text_with_emoji(user_text)
+                st.write("**Final cleaned text (sent to model):**")
+                st.code(cleaned)
+            
+            # Clean and predict using emoji-aware cleaning
+            clean_txt = clean_text_with_emoji(user_text)
             text_vec = vectorizer.transform([clean_txt])
             
             prediction = model.predict(text_vec)[0]
@@ -81,15 +224,15 @@ def show():
             st.markdown("---")
             st.subheader("📊 Results:")
             
-            # Result with color
+            # Result with color and matching emoji
             col1, col2 = st.columns(2)
             with col1:
                 if prediction == "positive":
-                    st.markdown("### 🟢 POSITIVE")
+                    st.markdown("### 🟢 POSITIVE 😊")
                 elif prediction == "negative":
-                    st.markdown("### 🔴 NEGATIVE")
+                    st.markdown("### 🔴 NEGATIVE 😠")
                 else:
-                    st.markdown("### 🔵 NEUTRAL")
+                    st.markdown("### 🔵 NEUTRAL 😐")
             
             with col2:
                 st.metric("Confidence", f"{confidence:.1f}%")
@@ -114,30 +257,44 @@ def show():
             }).set_index("sentiment")
             st.bar_chart(chart_data)
     
-    # Example texts section
-    # with st.expander("📋 Try these examples"):
+    # Example texts section with emojis
+    # with st.expander("📋 Try these examples with emojis"):
     #     examples = {
-    #         "Positive": "I absolutely love this product! It's amazing! 😍",
-    #         "Negative": "Very disappointed with the service today 😠",
-    #         "Neutral": "The weather is nice today. Nothing special."
+    #         "Positive": "I absolutely love this product! It's amazing! 😍❤️🎉",
+    #         "Negative": "Very disappointed with the service today 😠😤💔",
+    #         "Neutral": "The weather is nice today. Nothing special. ☁️🌤️"
     #     }
         
     #     col1, col2, col3 = st.columns(3)
         
-        # with col1:
-        #     if st.button("😊 Positive Example", use_container_width=True):
-        #         st.session_state.text_input = examples["Positive"]
-        #         st.rerun()
+    #     with col1:
+    #         if st.button("😊 Positive + Emoji", use_container_width=True):
+    #             st.session_state.text_input = examples["Positive"]
+    #             st.rerun()
         
-        # with col2:
-        #     if st.button("😠 Negative Example", use_container_width=True):
-        #         st.session_state.text_input = examples["Negative"]
-        #         st.rerun()
+    #     with col2:
+    #         if st.button("😠 Negative + Emoji", use_container_width=True):
+    #             st.session_state.text_input = examples["Negative"]
+    #             st.rerun()
         
-        # with col3:
-        #     if st.button("😐 Neutral Example", use_container_width=True):
-        #         st.session_state.text_input = examples["Neutral"]
-        #         st.rerun()
+    #     with col3:
+    #         if st.button("😐 Neutral + Emoji", use_container_width=True):
+    #             st.session_state.text_input = examples["Neutral"]
+    #             st.rerun()
+    
+    # Show emoji support info
+    # with st.expander("ℹ️ About Emoji Support"):
+    #     st.info("""
+    #     **Supported Emojis:**
+    #     - 😊😍🥰😘❤️ - Love/Positive
+    #     - 😠😡🤬😤 - Anger/Negative
+    #     - 😭😢😞😔 - Sad/Negative
+    #     - 🎉✨🌟🔥 - Celebration/Positive
+    #     - 👍👎✅❌ - Like/Dislike
+    #     - And many more!
+        
+    #     Emojis are converted to text descriptions before analysis.
+    #     """)
 
 # For direct execution
 if __name__ == "__main__":
