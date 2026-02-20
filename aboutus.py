@@ -3,7 +3,7 @@ import streamlit as st
 def show():
     st.title("ℹ️ About Our Sentiment Analysis System")
     
-    # ညီမရဲ့ မူရင်း about us content ကိုဒီမှာထည့်
+   
     st.markdown("""
     ### 🤖 Model Information
     - **Model Type:** Logistic Regression
