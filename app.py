@@ -24,4 +24,4 @@ else:
 
 # Footer
 st.sidebar.markdown("---")
-st.sidebar.caption("© 2024 Sentiment Analysis App")
+st.sidebar.caption("© 2026 Sentiment Analysis App")
