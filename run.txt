@@ -1,0 +1,3 @@
+in cmd
+>> cd Desktop/sentiment_app
+>>streamlit run app.py
