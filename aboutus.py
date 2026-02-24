@@ -5,25 +5,60 @@ def show():
     
    
     st.markdown("""
-    ### 🤖 Model Information
-    - **Model Type:** Logistic Regression
-    - **Algorithm:** Scikit-learn
-    - **Vectorization:** TF-IDF with 3000 features
-    - **Training Data:** 3,534 tweets
-    
-    ### 📚 Libraries Used
-    - Streamlit (v1.28.0)
-    - Scikit-learn (v1.3.0)
-    - Pandas (v2.0.3)
-    - NLTK (v3.8.1)
-    - NumPy (v1.24.3)
-    
-    ### 🎯 How It Works
-    1. **Text Cleaning** - Remove special characters, lowercase
-    2. **Vectorization** - Convert text to numbers (TF-IDF)
-    3. **Prediction** - Logistic Regression model
-    4. **Result** - Show sentiment with confidence score
-    """)
+### 🤖 မော်ဒယ်အကြောင်း
+- **မော်ဒယ်အမျိုးအစား:** Logistic Regression
+- **Algorithm:** Scikit-learn ကိုအသုံးမြုထားပါသည်။
+- **Vectorization:** TF-IDF နည်းလမ်းကိုအသုံးပြု၍ စကားလုံး ၃၅၀၀ ကျော်ကိုခွဲခြမ်းစိတ်ဖြာထားပါသည်။
+- **Training ပေးထားသောဒေတာ:** Tweet ပေါင်း ၃,၅၃၄ ခု
+
+### 📚 အသုံးပြုထားသည့် Library များ
+- **Streamlit** (v1.28.0) - Web App အတွက်အသုံးပြုထားသည့် library ဖြစ်ပါသည်။
+- **Scikit-learn** (v1.3.0) - Machine Learning အတွက်အသုံးပြုထားသည့် library ဖြစ်ပါသည်။
+- **Pandas** (v2.0.3) - Data များကိုတွက်ချက်ရန် အသုံးပြုထားသည့် library ဖြစ်ပါသည်။
+- **NLTK** (v3.8.1) - စာသားများကိုရှင်းလင်းရန်အတွက် အသုံးပြုထားသည့် library ဖြစ်ပါသည်။
+- **NumPy** (v1.24.3) - ဂဏန်းတွက်ချက်မှုများအတွက်အသုံးပြုထားသည့် library ဖြစ်ပါသည်။
+
+### 🎯 အလုပ်လုပ်ပုံ အဆင့်ဆင့်
+၁. **စာသားရှင်းလင်းခြင်း** 
+   - မလိုအပ်သော သင်္ကေတများ၊ နံပါတ်များကို ဤအဆင့်တွင်ဖယ်ရှားပါသည်။
+   - Tweet မှ English စာလုံးအကြီးအသေးကိုပြင်ဆင်ခြင်းပြုလုပ်ပါသည်။
+
+၂. **Vectorization (TF-IDF)** 
+   - စာသားများကို ကွန်ပျူတာနားလည်နိုင်သည့် ဂဏန်းတန်ဖိုးများအဖြစ်ပြောင်းလဲကာ အရေးပါသော စကားလုံး ၃၅၀၀ကျော် ကိုရွေးချယ်၍ တွက်ချက်ခြင်းကိုလုပ်ဆောင်ပါသည်။
+
+၃. **ခန့်မှန်းခြင်း (Prediction)** 
+   - Logistic Regression မော်ဒယ်သည် စာသားဧ။်ခံစားချက်ကိုခန့်မှန်းပေးခြင်းကို လုပ်‌ဆောင်ပါသည်။
+   - Positive (ပျော်ရွှင်), Negative (စိတ်ဆိုး/ဝမ်းနည်း), Neutral (ကြားနေ) ဆိုပြီး အမျိုးမျိုးသော ခံစားချက်ကို ခွဲခြားပေးသည်။
+
+၄. **ရလဒ်ပြသခြင်း** 
+   - ခန့်မှန်းချက်ရလဒ်
+   - ယုံကြည်ချက်ရာခိုင်နှုန်း (Confidence Score)
+   - ဖြစ်နိုင်ခြေရာခိုင်နှုန်းများ
+
+### ⭐ အင်္ဂါရပ်များ
+- **အချိန်နှင့်တပြေးညီ ခွဲခြမ်းစိတ်ဖြာခြင်း** - စက္ကန့်ပိုင်းအတွင်းရလဒ်ရယူနိုင်
+- **Emoji ပံ့ပိုးမှု** - 😊😍❤️ စတဲ့ emoji တွေကိုပါဖတ်နိုင်
+- **အသုံးပြုရလွယ်ကူ** - စာသားရိုက်ထည့်ရုံသာလိုအပ်ပါသည်။
+
+### 📊 မော်ဒယ်စွမ်းဆောင်ရည်
+- **တိကျမှု (Accuracy):** ၈၅%
+- **တုံ့ပြန်နှုန်း (Recall):** ၈၃%
+- **F1-Score:** ၀.၈၃
+
+### 🔄 Update များ
+- **v1.0** - Base model (Logistic Regression)
+- **v1.1** - Added emoji support
+- **v2.0** - Improved accuracy, better UI
+
+### 📞 ဆက်သွယ်ရန်
+- **Email:** wyee659@gmail.com
+
+### ⚠️ သတိပြုရန်
+- မော်ဒယ်ကို Twitter data ဖြင့် Train ပေးထားသောကြောင့် လူမှုကွန်ရက်စာသားများအတွက် ပိုကောင်းပါသည်။
+
+---
+**© 2026 Sentiment Analysis App | ** ❤️
+""")
 
 # For direct execution
 if __name__ == "__main__":
