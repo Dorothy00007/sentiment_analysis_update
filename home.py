@@ -19,7 +19,7 @@ def show():
             st.sidebar.write(f"- {sentiment}: {count}")
             
     except:
-        st.sidebar.warning("")
+        st.sidebar.warning("Welcome❤️")
     
     # Rest of your code...
     st.write("Enter text to analyze its sentiment (Positive/Negative/Neutral)")
