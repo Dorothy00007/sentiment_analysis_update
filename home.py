@@ -127,29 +127,29 @@ def show():
             st.bar_chart(chart_data)
     
     # Example texts section
-    with st.expander("📋 Try these examples"):
-        examples = {
-            "Positive": "I absolutely love this product! It's amazing! 😍",
-            "Negative": "Very disappointed with the service today 😠",
-            "Neutral": "The weather is nice today. Nothing special."
-        }
+    # with st.expander("📋 Try these examples"):
+    #     examples = {
+    #         "Positive": "I absolutely love this product! It's amazing! 😍",
+    #         "Negative": "Very disappointed with the service today 😠",
+    #         "Neutral": "The weather is nice today. Nothing special."
+    #     }
         
-        col1, col2, col3 = st.columns(3)
+    #     col1, col2, col3 = st.columns(3)
         
-        with col1:
-            if st.button("😊 Positive Example", use_container_width=True):
-                st.session_state.text_input = examples["Positive"]
-                st.rerun()
+    #     with col1:
+    #         if st.button("😊 Positive Example", use_container_width=True):
+    #             st.session_state.text_input = examples["Positive"]
+    #             st.rerun()
         
-        with col2:
-            if st.button("😠 Negative Example", use_container_width=True):
-                st.session_state.text_input = examples["Negative"]
-                st.rerun()
+    #     with col2:
+    #         if st.button("😠 Negative Example", use_container_width=True):
+    #             st.session_state.text_input = examples["Negative"]
+    #             st.rerun()
         
-        with col3:
-            if st.button("😐 Neutral Example", use_container_width=True):
-                st.session_state.text_input = examples["Neutral"]
-                st.rerun()
+    #     with col3:
+    #         if st.button("😐 Neutral Example", use_container_width=True):
+    #             st.session_state.text_input = examples["Neutral"]
+    #             st.rerun()
 
 if __name__ == "__main__":
     show()
