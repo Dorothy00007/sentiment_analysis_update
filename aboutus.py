@@ -7,7 +7,7 @@ def show():
     st.markdown("""
 ### 🤖 မော်ဒယ်အကြောင်း
 - **မော်ဒယ်အမျိုးအစား:** Logistic Regression
-- **Algorithm:** Scikit-learn ကိုအသုံးမြုထားပါသည်။
+- **Algorithm:** Scikit-learn ကိုအသုံးပြုထားပါသည်။
 - **Vectorization:** TF-IDF နည်းလမ်းကိုအသုံးပြု၍ စကားလုံး ၃၅၀၀ ကျော်ကိုခွဲခြမ်းစိတ်ဖြာထားပါသည်။
 - **Training ပေးထားသောဒေတာ:** Tweet ပေါင်း ၃,၅၃၄ ခု
 
@@ -45,10 +45,6 @@ def show():
 - **တုံ့ပြန်နှုန်း (Recall):** ၈၃%
 - **F1-Score:** ၀.၈၃
 
-### 🔄 Update များ
-- **v1.0** - Base model (Logistic Regression)
-- **v1.1** - Added emoji support
-- **v2.0** - Improved accuracy, better UI
 
 ### 📞 ဆက်သွယ်ရန်
 - **Email:** wyee659@gmail.com
