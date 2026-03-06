@@ -1,3 +1,84 @@
+import streamlit as st
+import pickle
+import re
+import pandas as pd
+
+def show():
+    st.title("😊 Sentiment Analysis")
+    
+    # Load dataset info
+    try:
+        df = pd.read_csv('sa.csv')
+        total_tweets = len(df)
+        sentiment_counts = df['sentiment'].value_counts()
+        
+        st.sidebar.markdown("### 📊 Dataset Info")
+        st.sidebar.info(f"Total Tweets: {total_tweets}")
+        st.sidebar.write("Sentiment Distribution:")
+        for sentiment, count in sentiment_counts.items():
+            st.sidebar.write(f"- {sentiment}: {count}")
+            
+    except:
+        st.sidebar.warning("Welcome❤️")
+    
+    # Rest of your code...
+    st.write("Enter text to analyze its sentiment (Positive/Negative/Neutral)")
+    
+    # Twitter character limit
+    MAX_TWEET_LENGTH = 280
+
+    # Load model
+    try:
+        with open("sentiment_model.pkl", "rb") as f:
+            model_data = pickle.load(f)
+        model = model_data["model"]
+        vectorizer = model_data["vectorizer"]
+        st.success("✅ Model loaded successfully!")
+    except:
+        st.error("❌ Model file not found.")
+        st.stop()
+
+    # Text cleaning
+    def clean_text(text):
+        text = str(text).lower()
+        text = re.sub(r"[^a-zA-Z\s]", "", text)
+        return text.strip()
+
+    # Text input with character limit
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        user_text = st.text_area(
+            "📝 Enter your text:", 
+            height=100,
+            max_chars=MAX_TWEET_LENGTH,
+            placeholder=f"Type your text here... (max {MAX_TWEET_LENGTH} characters)",
+            key="text_input"
+        )
+    
+    with col2:
+        st.markdown("### 📊 Limit")
+        st.info(f"Max: {MAX_TWEET_LENGTH} chars")
+        
+        if user_text:
+            chars_used = len(user_text)
+            remaining = MAX_TWEET_LENGTH - chars_used
+            word_count = len(user_text.split())
+            
+            if remaining > 50:
+                st.metric("Remaining", f"{remaining} chars", delta_color="off")
+                st.caption(f"📝 Words: {word_count}")
+                st.success("✅ Good length")
+            elif remaining > 20:
+                st.metric("Remaining", f"{remaining} chars", delta_color="off")
+                st.caption(f"📝 Words: {word_count}")
+                st.warning("⚠️ Getting long")
+            elif remaining >= 0:
+                st.metric("Remaining", f"{remaining} chars", delta_color="inverse")
+                st.caption(f"📝 Words: {word_count}")
+                st.error("🔴 Almost at limit")
+            else:
+                st.error(f"❌ Over by {abs(remaining)} chars")
 # Analyze button
     if st.button("🔍 Analyze Sentiment", type="primary"):
         if not user_text.strip():
