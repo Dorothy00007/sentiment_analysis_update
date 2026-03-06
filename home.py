@@ -79,7 +79,7 @@ def show():
                 st.error("🔴 Almost at limit")
             else:
                 st.error(f"❌ Over by {abs(remaining)} chars")
-# Analyze button
+                # Analyze button
     if st.button("🔍 Analyze Sentiment", type="primary"):
         if not user_text.strip():
             st.warning("⚠️ Please enter some text!")
