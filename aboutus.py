@@ -7,7 +7,6 @@ def show():
     st.markdown("""
 ### 🤖 မော်ဒယ်အကြောင်း
 - **မော်ဒယ်အမျိုးအစား:** Logistic Regression
-- **Algorithm:** Scikit-learn ကိုအသုံးပြုထားပါသည်။
 - **Vectorization:** TF-IDF နည်းလမ်းကိုအသုံးပြု၍ စကားလုံး ၃၅၀၀ ကျော်ကိုခွဲခြမ်းစိတ်ဖြာထားပါသည်။
 - **Training ပေးထားသောဒေတာ:** Tweet ပေါင်း ၃,၅၃၄ ခု
 
