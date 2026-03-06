@@ -284,27 +284,27 @@ def show():
    
     
     # Show current emoji mapping for debugging
-    with st.expander("🔧 Debug: See Emoji Mapping"):
-        st.write("**Negative Emojis Mapping:**")
-        negative_emojis = {
-            '😡': ' angry mad furious frustrated upset terrible bad negative horrible awful ',
-            '😢': ' sad tearful unhappy depressed negative ',
-            '😞': ' disappointed sad upset unhappy negative ',
-            '👎': ' dislike bad terrible poor negative horrible ',
-            '❌': ' wrong no bad incorrect negative ',
-            '💔': ' heartbroken sad devastated negative terrible awful ',
-        }
+    # with st.expander("🔧 Debug: See Emoji Mapping"):
+    #     st.write("**Negative Emojis Mapping:**")
+    #     negative_emojis = {
+    #         '😡': ' angry mad furious frustrated upset terrible bad negative horrible awful ',
+    #         '😢': ' sad tearful unhappy depressed negative ',
+    #         '😞': ' disappointed sad upset unhappy negative ',
+    #         '👎': ' dislike bad terrible poor negative horrible ',
+    #         '❌': ' wrong no bad incorrect negative ',
+    #         '💔': ' heartbroken sad devastated negative terrible awful ',
+    #     }
         
-        for emoji_char, mapping in negative_emojis.items():
-            st.write(f"{emoji_char} -> {mapping}")
+    #     for emoji_char, mapping in negative_emojis.items():
+    #         st.write(f"{emoji_char} -> {mapping}")
         
-        st.write("\n**Test with just 😡 emoji:**")
-        test_text = "😡"
-        converted = emoji_to_text_with_sentiment(test_text)
-        cleaned = clean_text_with_emoji(test_text)
-        st.write(f"Original: {test_text}")
-        st.write(f"Converted: {converted}")
-        st.write(f"Cleaned: {cleaned}")
+    #     st.write("\n**Test with just 😡 emoji:**")
+    #     test_text = "😡"
+    #     converted = emoji_to_text_with_sentiment(test_text)
+    #     cleaned = clean_text_with_emoji(test_text)
+    #     st.write(f"Original: {test_text}")
+    #     st.write(f"Converted: {converted}")
+    #     st.write(f"Cleaned: {cleaned}")
 
 # For direct execution
 if __name__ == "__main__":
